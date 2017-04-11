@@ -1,0 +1,11 @@
+[supervisord]
+logfile = /var/log/supervisor/supervisord.log
+childlogdir = /var/log/supervisor
+loglevel = debug
+
+[program:api]
+environment = ENV=production, REDIS_HOST="127.0.0.1"
+#environment = ENV=development, REDIS_HOST="127.0.0.1"
+
+user=ubuntu
+command=/home/ubuntu/venv/bin/python /home/ubuntu/api/devops-test/python/api.py

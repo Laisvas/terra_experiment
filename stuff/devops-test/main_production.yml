@@ -1,0 +1,42 @@
+---
+- hosts: localhost
+  vars:
+    api_base_dir: /home/ubuntu
+    api_subdir: api
+    virtualenv_subdir: venv
+    api_user: ubuntu
+
+  tasks:
+   - name: copy the files to user's dir
+     copy:
+       src=/root/devops-test
+       dest="{{api_base_dir}}/{{api_subdir}}"
+
+   - name: change the owner
+     file:
+       path={{api_base_dir}}
+       owner={{api_user}}
+       recurse=yes
+
+
+   - name: create a virtualenv and install the requirements
+     pip:
+      requirements: "{{api_base_dir}}/{{api_subdir}}/devops-test/python/requirements.txt"
+      virtualenv:   "{{api_base_dir}}/{{virtualenv_subdir}}"
+
+   - name: install redis-server and supervisor
+     apt: name={{item}} state=present
+     with_items:
+           - supervisor
+           - redis-server
+
+   - name: put supervisor's config
+     copy:
+       src="{{api_base_dir}}/{{api_subdir}}/devops-test/supervisord.conf.prod"
+       dest=/etc/supervisor/supervisord.conf
+
+   - name: (re)start and enable supervisor and redis-server
+     service: name={{item}} state=restarted
+     with_items:
+          - supervisor
+          - redis-server
