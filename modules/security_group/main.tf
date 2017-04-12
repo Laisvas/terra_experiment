@@ -1,6 +1,7 @@
 variable "security_group_name" {
   description = "The name for the security group"
-  default     = "def"
+
+  #default     = "def"
 }
 
 variable "vpc_id" {
@@ -57,5 +58,5 @@ resource "aws_security_group" "main_security_group" {
 }
 
 output "vpc_security_group_ids" {
-  value = ["${aws_security_group.main_security_group.id}"]
+  value = "${aws_security_group.main_security_group.id}"
 }

@@ -46,9 +46,3 @@ output "aws_subnet.main.id" {
 output "route_table_ids" {
   value = "${aws_route_table.r.id}"
 }
-
-/*
-output "aws_vpc.main.id" {
-  value = "aws_vpc.main.id"
-} */
-

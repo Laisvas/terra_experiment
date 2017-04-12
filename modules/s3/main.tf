@@ -1,8 +1,9 @@
 variable "policy" {}
+variable "bucket_name" {}
 
 resource "aws_s3_bucket" "terraform-stuff" {
   provider = "aws"
-  bucket   = "terraform-stuff"
+  bucket   = "${var.bucket_name}"
   policy   = "${var.policy}"
 }
 

@@ -1,41 +1,30 @@
 variable "relative_public_key_path" {}
-variable "timeout" {}
-variable "os_type" {}
-variable "region" {}
-
-#variable "shared_credentials_file"  {}
 variable "relative_credentials" {}
-
+variable "region" {}
+variable "os_type" {}
 variable "distribution" {}
 variable "storagetype" {}
 variable "use_module_for_ami" {}
 variable "key_name" {}
+variable "instance_type" {}
+variable "system_user" {}
+variable "bucket_name" {}
 
 variable "user_data" {
   default = ""
 }
 
-variable "user_arn" {
-  default = ""
-}
-
-variable "my_cidr" {
-  default = ""
-}
-
-variable "architecture" {
-  default = "amd64"
-}
-
-variable "virttype" {
-  default = "hvm"
-}
+variable "security_group_name" {}
+variable "user_arn" {}
+variable "my_cidr" {}
+variable "architecture" {}
+variable "virttype" {}
 
 variable "vpc_security_group_ids" {
   default = []
 }
 
-# this list is used if "use_module_for_ami" = false :
+# this map is used if use_module_for_ami == false :
 variable "amis_ubuntu" {
   type = "map"
 
@@ -60,12 +49,4 @@ variable "amis_ubuntu" {
     us-west-1      = "ami-44613824"
     us-west-2      = "ami-fa27b39a"
   }
-}
-
-variable "instance_type" {
-  default = "t2.micro"
-}
-
-variable "system_user" {
-  default = "ubuntu"
 }

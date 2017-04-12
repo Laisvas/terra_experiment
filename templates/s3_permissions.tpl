@@ -25,7 +25,7 @@
         "arn:aws:s3:::terraform-stuff/*"
       ],
       "Principal": {
-        "AWS": ""
+        "AWS": "${user_arn}"
       }
     }
   ]
